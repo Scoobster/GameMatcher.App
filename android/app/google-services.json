@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "260948539682",
+    "firebase_url": "https://gamematcher-83d43.firebaseio.com",
+    "project_id": "gamematcher-83d43",
+    "storage_bucket": "gamematcher-83d43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260948539682:android:09f8bbf696cf64fc3e0d7b",
+        "android_client_info": {
+          "package_name": "com.gamematcherapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260948539682-2klrjpc9447civvlk9eioev9db7t03qh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamematcherapp",
+            "certificate_hash": "83994f6b5ad5dbec7f10ea39375256e0cfe5b5f0"
+          }
+        },
+        {
+          "client_id": "260948539682-qnhjgoi5uer5avjv3t6r6ef6tscj9c50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrW644ur5ufKojeJ1GLJmfqxIVguoKsFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260948539682-qnhjgoi5uer5avjv3t6r6ef6tscj9c50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
