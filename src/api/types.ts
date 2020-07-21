@@ -5,4 +5,5 @@ export interface Player {
   clubId: number;
   ability: number;
   phoneNumber?: string;
+  deviceToken?: string;
 }

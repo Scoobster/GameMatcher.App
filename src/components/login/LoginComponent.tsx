@@ -1,34 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
+  SafeAreaView,
+  ScrollView,
   Text,
-  StatusBar,
   Button,
+  StyleSheet,
+  Alert,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import FirebaseService from './src/firebase/FirebaseService';
-import {
-  Notification,
-  NotificationOpen,
-} from 'react-native-firebase/notifications';
-import {Player} from './src/api/types';
-import GameMatcherService from './src/api/GameMatcherService';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import GameMatcherService from '../../api/GameMatcherService';
+import { Player } from '../../api/types';
+import StoreService from '../../store/StoreService';
 const t = require('tcomb-form-native');
-
-declare const global: {HermesInternal: null | {}};
 
 const Form = t.form.Form;
 const FormType = t.struct({
@@ -39,40 +23,14 @@ const FormType = t.struct({
   phoneNumber: t.maybe(t.String),
 });
 
-export default class App extends Component<any, any> {
-  private firebaseService: FirebaseService = new FirebaseService();
+export default class LoginComponent extends Component {
   private gameMatcherService: GameMatcherService = new GameMatcherService();
+  private storeService: StoreService = new StoreService();
 
   private playerFormValues: any;
 
   constructor(props: any) {
     super(props);
-    this.playerFormValues = {};
-  }
-
-  public componentDidMount() {
-    this.firebaseService.register(
-      this.onRegister,
-      this.onNotification,
-      this.onNotificationOpen,
-    );
-  }
-
-  public componentWillUnmount() {
-    this.firebaseService.unregister();
-  }
-
-  public onRegister(token: string) {
-    console.log('[NotificationFCM] New token: ', token);
-    // TODO: Send token to db
-  }
-
-  public onNotification(notification: Notification) {
-    console.log('[NotificationFCM] onNotification: ', notification);
-  }
-
-  public onNotificationOpen(notificationOpen: NotificationOpen) {
-    console.log('[NotificationFCM] onNotificationOpen: ', notificationOpen);
   }
 
   private onFormChange = (value: any) => {
@@ -98,13 +56,30 @@ export default class App extends Component<any, any> {
       phoneNumber: this.playerFormValues.phoneNumber,
     };
 
-    this.gameMatcherService.addPlayer(player);
+    this.storeService.setPlayerInfo(player);
+
+    this.gameMatcherService.addPlayer(player).then((playerId: number) => {
+      if (playerId !== -1) {
+        this.storeService.setPlayerId(playerId);
+        this.updateToken(playerId);
+        Alert.alert('Player saved! Player id is ' + playerId);
+      } else {
+        Alert.alert('Player failed to save.');
+      }
+    });
   };
 
-  render() {
+  private updateToken(playerId: number) {
+    this.storeService
+      .getFirebaseToken()
+      .then((token: string) =>
+        this.gameMatcherService.updateDeviceToken(playerId, token),
+      );
+  }
+
+  public render() {
     return (
       <>
-        <StatusBar barStyle="dark-content" />
         <SafeAreaView>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
