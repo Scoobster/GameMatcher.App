@@ -7,14 +7,29 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "debug-build": "powershell -executionpolicy bypass -File .\\create-debug-apk.ps1"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/datetimepicker": "^2.6.0",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/slider": "^3.0.3",
+    "@react-navigation/bottom-tabs": "^5.7.3",
+    "@react-navigation/native": "^5.7.1",
+    "@react-navigation/stack": "^5.7.1",
+    "@reduxjs/toolkit": "^1.4.0",
+    "@types/react-native-vector-icons": "^6.4.5",
     "react": "16.13.1",
     "react-native": "0.63.0",
     "react-native-firebase": "^5.6.0",
-    "tcomb-form-native": "^0.6.20"
+    "react-native-gesture-handler": "^1.7.0",
+    "react-native-reanimated": "^1.10.1",
+    "react-native-safe-area-context": "^3.1.1",
+    "react-native-screens": "^2.9.0",
+    "react-native-vector-icons": "^7.0.0",
+    "react-native-wheel-picker-android": "^2.0.6",
+    "react-navigation": "^4.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
